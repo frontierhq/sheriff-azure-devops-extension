@@ -1,5 +1,9 @@
 # Sheriff Azure DevOps Extension Changelog
 
+## 0.0.11
+
+* Added `skipMissingScopes` input for `SheriffPlan` and `SheriffApply` tasks, defaults to `false`.
+
 ## 0.0.10
 
 * Added `autoApprove` input for `SheriffApply` task, defaults to `true`.
