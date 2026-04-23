@@ -34,6 +34,7 @@ async function run() {
     const mode = tl.getInput('mode', true);
     const planOnly = (tl.getInput('planOnly', false) === 'true');
     const autoApprove = (tl.getInput('autoApprove', false) === 'true');
+    const skipMissingScopes = (tl.getInput('skipMissingScopes', false) === 'true');
 
     let subscriptionId = tl.getInput('subscriptionId', false);
 
@@ -100,6 +101,7 @@ async function run() {
         subscriptionId,
         planOnly ? '--plan-only' : '',
         autoApprove ? '--auto-approve' : '',
+        skipMissingScopes ? '--skip-missing-scopes' : '',
       ],
       {
         env: {
