@@ -46,6 +46,14 @@
       "label": "Subscription ID",
       "required": false,
       "helpMarkDown": "The subscription ID"
+    },
+    {
+      "name": "skipMissingScopes",
+      "type": "boolean",
+      "label": "Skip missing scopes",
+      "required": false,
+      "defaultValue": false,
+      "helpMarkDown": "Skip missing scopes instead of failing"
     }
   ],
   "execution": {

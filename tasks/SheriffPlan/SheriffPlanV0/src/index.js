@@ -32,6 +32,7 @@ async function run() {
     const connectedService = tl.getInput('serviceConnectionName', true);
     const licenceFilePath = tl.getInput('licenceFilePath', false);
     const mode = tl.getInput('mode', true);
+    const skipMissingScopes = (tl.getInput('skipMissingScopes', false) === 'true');
 
     let subscriptionId = tl.getInput('subscriptionId', false);
 
@@ -96,6 +97,7 @@ async function run() {
         licenceFilePath,
         '--subscription-id',
         subscriptionId,
+        skipMissingScopes ? '--skip-missing-scopes' : '',
       ],
       {
         env: {
