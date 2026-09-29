@@ -13,7 +13,8 @@
     "axios": "^1.4.0",
     "azure-devops-node-api": "^13.0.0",
     "azure-pipelines-task-lib": "^4.4.0",
-    "azure-pipelines-tasks-artifacts-common": "^2.230.0"
+    "azure-pipelines-tasks-artifacts-common": "^2.230.0",
+    "common": "file:../../../common"
   },
   "devDependencies": {
     "eslint": "^8.44.0",

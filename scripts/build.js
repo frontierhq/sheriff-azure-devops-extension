@@ -21,6 +21,7 @@ const build = async () => {
   const manifestDefinition = JSON.parse(await fs.promises.readFile(path.join(process.cwd(), 'vss-extension.json'), 'utf8'));
 
   const pathsToCopy = [
+    'common',
     'images',
     'overview.md',
     'package-lock.json',
@@ -46,7 +47,7 @@ const build = async () => {
     const findResult = await exec(`find ${path.join(tempDirPath, file.path)} -type f -name package.json -maxdepth 3 -exec dirname {} \\;`);
     const taskDirPaths = findResult.trim().split('\n');
     await Promise.all(taskDirPaths.map(async (taskDirPath) => {
-      await exec(`npm --prefix ${taskDirPath} ci --omit=dev`);
+      await exec(`npm --prefix ${taskDirPath} ci --omit=dev --install-links`);
 
       const taskPackageDefinition = JSON.parse(await fs.readFile(path.join(taskDirPath, 'package.json'), 'utf8'));
 

@@ -5,8 +5,10 @@
   "scripts": {
     "build": "node ./scripts/build.js",
     "install": "run-p install:*",
-    "install:tasks": "find ./tasks -type d -regex \".*V[0-9]\" -maxdepth 2 -exec npm --prefix {} install \\;",
+    "install:common": "cd common && npm install",
+    "install:tasks": "find ./tasks -type d -regex \".*V[0-9]\" -maxdepth 2 -exec sh -c 'cd \"$1\" && rm -rf node_modules/common && npm install --install-links' _ {} \\;",
     "test": "run-p test:*",
+    "test:common": "cd common && npm test",
     "test:js": "eslint .",
     "test:tasks": "find ./tasks -type d -regex \".*V[0-9]\" -maxdepth 2 -exec npm --prefix {} test \\;"
   },

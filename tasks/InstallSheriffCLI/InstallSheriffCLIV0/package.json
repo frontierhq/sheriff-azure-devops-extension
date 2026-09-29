@@ -11,7 +11,8 @@
   "license": "GPL-3.0",
   "dependencies": {
     "axios": "^1.4.0",
-    "azure-pipelines-task-lib": "^4.4.0"
+    "azure-pipelines-task-lib": "^4.4.0",
+    "common": "file:../../../common"
   },
   "devDependencies": {
     "eslint": "^8.44.0",

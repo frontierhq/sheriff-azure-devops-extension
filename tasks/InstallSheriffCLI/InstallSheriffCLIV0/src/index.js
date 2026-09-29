@@ -6,6 +6,7 @@ const path = require('path');
 const stream = require('stream');
 const tl = require('azure-pipelines-task-lib/task');
 const { promisify } = require('util');
+const { getErrorMessage } = require('common');
 
 const finished = promisify(stream.finished);
 
@@ -83,11 +84,7 @@ async function run() {
 
     tl.setResult(tl.TaskResult.Succeeded, 'Success');
   } catch (err) {
-    if (err instanceof Error) {
-      tl.setResult(tl.TaskResult.Failed, err.message);
-    } else {
-      tl.setResult(tl.TaskResult.Failed, 'Unknown error');
-    }
+    tl.setResult(tl.TaskResult.Failed, getErrorMessage(err));
   }
 }
 

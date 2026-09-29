@@ -6,6 +6,7 @@ const path = require('path');
 const { getHandlerFromToken, WebApi } = require('azure-devops-node-api');
 const tl = require('azure-pipelines-task-lib/task');
 const { getSystemAccessToken } = require('azure-pipelines-tasks-artifacts-common/webapi');
+const { buildBaseArgs, getErrorMessage } = require('common');
 
 async function getIdToken(connectedService) {
   const jobId = tl.getVariable('System.JobId');
@@ -91,14 +92,7 @@ async function run() {
     await tl.execAsync(
       'sheriff',
       [
-        'apply',
-        mode,
-        configDir ? '--config-dir' : '',
-        configDir,
-        licenceFilePath ? '--licence-file' : '',
-        licenceFilePath,
-        '--subscription-id',
-        subscriptionId,
+        ...buildBaseArgs('apply', mode, configDir, licenceFilePath, subscriptionId),
         planOnly ? '--plan-only' : '',
         autoApprove ? '--auto-approve' : '',
         skipMissingScopes ? '--skip-missing-scopes' : '',
@@ -114,11 +108,7 @@ async function run() {
 
     tl.setResult(tl.TaskResult.Succeeded, 'Success');
   } catch (err) {
-    if (err instanceof Error) {
-      tl.setResult(tl.TaskResult.Failed, err.message);
-    } else {
-      tl.setResult(tl.TaskResult.Failed, 'Unknown error');
-    }
+    tl.setResult(tl.TaskResult.Failed, getErrorMessage(err));
   }
 }
 
